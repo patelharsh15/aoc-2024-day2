@@ -1,39 +1,33 @@
 # Advent of Code 2024 — Day 2: Red-Nosed Reports
 
-Clean, production-grade Python solution.
+My solution for [AoC 2024 Day 2](https://adventofcode.com/2024/day/2) in Python.
 
 ## Problem
 
-Determine how many "reports" (rows of integers) are **safe**:
-- **Part 1** — levels must be strictly monotonic (all-increasing *or* all-decreasing) with adjacent differences in `[1, 3]`.
-- **Part 2** — same rule, but the *Problem Dampener* lets you tolerate one bad level (remove any single element and re-check).
+Given a list of reports (rows of integers), figure out how many are **safe**.
 
-## Usage
+- **Part 1** — A report is safe if the levels are strictly monotonic (all going up or all going down) and every adjacent pair differs by 1 to 3.
+- **Part 2** — Same rules, but the *Problem Dampener* kicks in: a report counts as safe if removing any single level makes it pass the check.
+
+## How to Run
 
 ```bash
-# Run with your puzzle input
+# solve with the included example input
 python solution.py input.txt
 
-# Run tests
+# run the test suite
 pytest test_solution.py -v
 ```
 
-## Project Structure
+## Files
 
-| File                | Purpose                          |
-|---------------------|----------------------------------|
-| `solution.py`       | Main solver (Parts 1 & 2)       |
-| `test_solution.py`  | Pytest suite with example data   |
-| `input.txt`         | Your puzzle input (not tracked)  |
+| File              | What it does                     |
+|-------------------|----------------------------------|
+| `solution.py`     | Main solver for Parts 1 & 2     |
+| `test_solution.py`| Pytest suite with example data   |
+| `input.txt`       | Puzzle input                     |
 
-## Algorithm
+## Quick Notes
 
-| Function            | Complexity | Description                                  |
-|---------------------|-----------|-----------------------------------------------|
-| `is_safe`           | O(K)      | Single-pass diff check for monotonicity       |
-| `is_safe_dampened`  | O(K²)     | Brute-force single-removal; sufficient for K≤~30 |
-| `solve`             | O(N·K²)   | Iterates all N reports                        |
-
-## License
-
-MIT
+- `is_safe(levels)` does a single-pass diff check — O(K).
+- `is_safe_dampened(levels)` brute-forces single-element removal — O(K²), plenty fast for the input sizes here.
